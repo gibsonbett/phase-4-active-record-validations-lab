@@ -5,7 +5,12 @@ class Post < ApplicationRecord
     validates  :category, inclusion: {in: %w(Fiction Non-Fiction)}
     validate :title_is_clickbait?
 
-    CLICKBAITS = [ /You Won't Believe These /i ]
+    CLICKBAITS = [ 
+        /Won't Believe/i,
+        /Secret/i,
+        /Top \d/i,
+        /Guess/i
+     ]
     
     def title_is_clickbait?
         if CLICKBAITS.none? {|t| t.match title}
